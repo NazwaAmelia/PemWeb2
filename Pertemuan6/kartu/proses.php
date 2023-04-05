@@ -19,20 +19,19 @@ if ($_proses == "Simpan") {
     // data baru
     $sql = "INSERT INTO kartu (kode,nama,diskon,iuran) VALUES (?,?,?,?)";
 } else if ($_proses == "Update") {
-    $ar_data[] = $_POST['idedit']; // ? 8
-    $sql = "UPDATE pelanggan SET kode=?,nama=?,diskon=?,iuran=?,
-    tgl_lahir=?,email=?,kartu_id=? WHERE id=?";
+    $ar_data[] = $_POST['id']; // ? 8
+    $sql = "UPDATE kartu SET kode=?,nama=?,diskon=?,iuran=? WHERE id=?";
 }
 if (isset($sql)) {
     $st = $dbh->prepare($sql);
-    $is_success= $st->execute($ar_data);
-    
-    //jika berhasil dijalankan
-    if ($is_success){
+    $is_success = $st->execute($ar_data);
+
+    // jika sql berhasil dijalankan
+    if ($is_success) {
         header('location:index.php');
     }
 }
 
-echo"Proses Gagal!!!";
-
+echo "Proses Gagal!";
+header('location:index.php');
 ?>
